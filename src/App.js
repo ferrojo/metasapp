@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Encabezado from './componentes/compartidos/Encabezado';
+import Encabezamiento from './componentes/compartidos/Encabezado';
+import Pie from './componentes/compartidos/Pie';
+import Principal from './componentes/compartidos/Principal';
+import Lista from './componentes/lista/Lista';
+import Detalles from './componentes/nueva/Detalles';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Encabezado></Encabezado>
+      <Principal>
+        {/* <Lista></Lista> */}
+        <Detalles></Detalles>
+      </Principal>
+      <Pie></Pie>
     </div>
   );
 }
