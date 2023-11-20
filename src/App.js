@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Encabezado></Encabezado>
       <Principal>
-        {/* <Lista></Lista> */}
+        <Lista></Lista>
         <Detalles></Detalles>
       </Principal>
       <Pie></Pie>
