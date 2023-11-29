@@ -2,11 +2,11 @@ import { useEffect, useState, useContext } from "react";
 import { Contexto } from "../../servicios/Memoria";
 import estilos from './Detalles.module.css';
 import { useNavigate, useParams } from "react-router";
+import { actualizarMeta, borrarMeta, crearMeta } from "../../servicios/Pedidos";
 
 function Detalles() {
 
     const { id } = useParams();
-
 
     const [form, setForm] = useState({
         detalles: '',
@@ -26,31 +26,35 @@ function Detalles() {
         console.log(form);
     }
 
-    useEffect(() => {
-        const metaMemoria = estado.objetos[id];
-        if (!id) return;
-        if (!metaMemoria) {
-            return navegar('/lista');
-        }
-        setForm(estado.objetos[id]);
-    }, [id]);
-
     // Ruta de react router para direccionar
     const navegar = useNavigate();
 
+    const metaMemoria = estado.objetos[id];
+
+    useEffect(() => {
+        if (!id) return;
+        if (!metaMemoria) {
+            return navegar('/404');
+        }
+        setForm(metaMemoria);
+    }, [id, metaMemoria, navegar]);
+
     // Funcion para crear una lista
-    const crear = () => {
-        enviar({ tipo: 'crear', meta: form });
+    const crear = async () => {
+        const nuevaMeta = await crearMeta();
+        enviar({ tipo: 'crear', meta: nuevaMeta });
         navegar('/lista');
     }
 
-    const actualizar = () => {
-        enviar({ tipo: 'actualizar', meta: form });
+    const actualizar = async () => {
+        const metaActualizada = await actualizarMeta();
+        enviar({ tipo: 'actualizar', meta: metaActualizada });
         navegar('/lista');
     }
 
-    const borrar = () => {
-        enviar({ tipo: 'borrar', id });
+    const borrar = async () => {
+        const idBorrada = await borrarMeta();
+        enviar({ tipo: 'borrar', id: idBorrada });
         navegar('/lista');
     }
 
@@ -88,7 +92,7 @@ function Detalles() {
                             value={periodo}
                             onChange={e => onChange(e, 'periodo')}
                         >
-                            {opcionesdefrecuencia.map(opcion => <option value={opcion}>{opcion}</option>)}
+                            {opcionesdefrecuencia.map(opcion => <option key={opcion} value={opcion}>{opcion}</option>)}
                             {/* <option value="día">al día</option>
                         <option value="semana">a la semana</option>
                         <option value="mes">al mes</option>
@@ -130,7 +134,7 @@ function Detalles() {
                         value={icono}
                         onChange={e => onChange(e, 'icono')}
                     >
-                        {iconos.map(opcion => <option value={opcion}>{opcion}</option>)}
+                        {iconos.map(opcion => <option key={opcion} value={opcion}>{opcion}</option>)}
                     </select>
                 </label>
             </form>

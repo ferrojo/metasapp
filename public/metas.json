@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1",
+        "detalles": "Correr por 30 minutos",
+        "eventos": 1,
+        "periodo": "semana",
+        "icono": "🏃🏻‍♂️",
+        "meta": "362",
+        "plazo": "2030-01-01",
+        "completado": "20"
+    },
+    {
+        "id": "2",
+        "detalles": "Leer libros",
+        "eventos": 1,
+        "periodo": "al año",
+        "icono": "📚",
+        "meta": "12",
+        "plazo": "2030-01-01",
+        "completado": "2"
+    },
+    {
+        "id": "3",
+        "detalles": "Ahorrar Dinero",
+        "eventos": 1,
+        "periodo": "a la semana",
+        "icono": "💰",
+        "meta": "48",
+        "plazo": "2030-01-01",
+        "completado": "10"
+    }
+]

@@ -1,13 +1,17 @@
 import { createContext, useReducer } from "react";
 
 // Guardar la data en la memoria de el sitio web
-const memoria = localStorage.getItem('metas');
-const estadoInicial = memoria
-    ? JSON.parse(memoria)
-    : {
-        orden: [],
-        objetos: {}
-    };
+// const memoria = localStorage.getItem('metas');
+const estadoInicial ={
+    orden: [],
+    objetos: {}
+};
+
+    // memoria ? JSON.parse(memoria)
+    //     : {
+    //         orden: [],
+    //         objetos: {}
+    //     };
 
 function reductor(estado, accion) {
     switch (accion.tipo) {
@@ -17,12 +21,13 @@ function reductor(estado, accion) {
                 orden: metas.map(meta => meta.id),
                 objetos: metas.reduce((objeto, meta) => ({ ...objeto, [meta.id]: meta }), {})
             };
-            localStorage.setItem('metas', JSON.stringify(nuevoEstado));
+            
+            // localStorage.setItem('metas', JSON.stringify(nuevoEstado));
             return nuevoEstado;
         };
 
         case 'crear': {
-            const id = String(Math.random()); //accion.meta.id;
+            const id = accion.meta.id; //String(Math.random());
             const nuevoEstado = {
                 orden: [...estado.orden, id],
                 objetos: {
@@ -30,7 +35,7 @@ function reductor(estado, accion) {
                     [id]: accion.meta
                 }
             };
-            localStorage.setItem('metas', JSON.stringify(nuevoEstado));
+            // localStorage.setItem('metas', JSON.stringify(nuevoEstado));
             return nuevoEstado;
         };
 
@@ -41,7 +46,7 @@ function reductor(estado, accion) {
                 ...accion.meta
             };
             const nuevoEstado = { ...estado };
-            localStorage.setItem('metas', JSON.stringify(nuevoEstado));
+            // localStorage.setItem('metas', JSON.stringify(nuevoEstado));
             return nuevoEstado;
         };
 
@@ -53,9 +58,11 @@ function reductor(estado, accion) {
                 orden: nuevoOrden,
                 objetos: estado.objetos
             };
-            localStorage.setItem('metas', JSON.stringify(nuevoEstado));
+            // localStorage.setItem('metas', JSON.stringify(nuevoEstado));
             return nuevoEstado;
         };
+        default:
+            throw new Error();
     }
 }
 

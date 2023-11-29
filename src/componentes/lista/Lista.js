@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Meta from "./meta";
 import { Contexto } from "../../servicios/Memoria";
+import { pedirMetas } from "../../servicios/Pedidos";
 
 
 
